@@ -1,0 +1,68 @@
+<div class="containerlg">
+<div class="row">
+    <div class="col-md-6">
+      <br>
+      <br>
+      <h1 class="display-4" >Welcome</h1>   
+      <br>
+      <br>
+      <h3 *ngIf='message'>
+       {{message}}
+      </h3>
+      
+       <div *ngIf="invalidLogin" class="fadeIn first">
+          <div class="txt-danger">Invalied user or password. Please try again</div>
+        </div>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+       
+          <input type="text" class="form-control" formControlName="user_name" 
+          id="user_name"  autocomplete="off" placeholder="User Name">
+          <div class="error"
+           *ngIf="loginForm.controls['user_name'].hasError('required') 
+          && loginForm.controls['user_name'].touched"></div>
+        </div><br>
+        <div class="fadeIn first">
+          
+          <input type="password" class="form-control"
+           formControlName="password" id="pwd" 
+          autocomplete="off" placeholder="Password">
+          <div class="error"
+           *ngIf="loginForm.controls['password'].hasError('required') 
+          && loginForm.controls['password'].touched"></div>
+        </div><br>
+  
+        <button class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
+         <!-- Button trigger modal -->
+<button type="button" class="btn btn-secondary float-right m-2" 
+data-toggle="modal" data-target="#exampleModal"
+(click)="addClick()"
+data-backdrop="static" data-keyboard="false"
+>
+    Registration
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{ModalTitle}}</h5>
+          <button type="button" class="close" 
+          data-dismiss="modal" aria-label="Close"
+          (click)="closeClick()" >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <app-registration [bran]="bran" *ngIf="ActivateAddEditRegistrationComp">
+            </app-registration>
+        </div>
+      </div>
+    </div>
+  </div>
+       
+      </form>
+    </div>
+  </div>
+</div>
